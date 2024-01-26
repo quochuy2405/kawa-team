@@ -1,23 +1,33 @@
 'use client'
 
 import {
+  AlignCenterOutlined,
+  AlignLeftOutlined,
+  AlignRightOutlined,
   BoldOutlined,
   CodeOutlined,
   ItalicOutlined,
   OrderedListOutlined,
+  QuestionCircleOutlined,
   RedoOutlined,
   StrikethroughOutlined,
   UndoOutlined,
   UnorderedListOutlined
 } from '@ant-design/icons'
 import { useCurrentEditor } from '@tiptap/react'
-import { Button, ColorPicker, Drawer, Space } from 'antd'
+import { Button, ColorPicker, Drawer, Popconfirm, Space } from 'antd'
 import clsx from 'clsx'
-import { AiOutlineMergeCells, AiOutlineSplitCells } from 'react-icons/ai'
+import {
+  AiOutlineDelete,
+  AiOutlineHighlight,
+  AiOutlineMergeCells,
+  AiOutlineSplitCells
+} from 'react-icons/ai'
 import { BsTable } from 'react-icons/bs'
+import { FaAlignJustify, FaHighlighter } from 'react-icons/fa'
 import { FcAddColumn, FcAddRow, FcDeleteColumn, FcDeleteRow } from 'react-icons/fc'
+import { LuImagePlus } from 'react-icons/lu'
 import { TbTableRow } from 'react-icons/tb'
-import { FaHighlighter } from 'react-icons/fa'
 
 type LevelType = 1 | 2 | 3 | 4 | 5 | 6
 const headings: Array<{ key: string; level: LevelType }> = [
@@ -38,6 +48,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
   if (!editor) {
     return null
   }
+  const addImage = () => {
+    const url = window.prompt('URL')
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run()
+    }
+  }
   return (
     <>
       <Drawer
@@ -49,9 +66,14 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" onClick={onClose}>
-              OK
-            </Button>
+            <Popconfirm
+              title="Submit?"
+              description="Are you sure to submit this paper?"
+              onConfirm={onClose}
+              icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+            >
+              <Button type="primary">Submit</Button>
+            </Popconfirm>
           </Space>
         }
       >
@@ -59,8 +81,9 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
           className="tiptap m-auto w-3/4"
           dangerouslySetInnerHTML={{ __html: editor.getHTML() }}
         ></div>
+        <span className="space"></span>
       </Drawer>
-      <div className="menu-edit sticky top-0 z-10 mb-5 flex flex-wrap gap-2 divide-x-2 border-b-2 bg-white px-4 pb-2">
+      <div className="menu-edit sticky top-0 z-10 mb-5 flex flex-wrap gap-2 divide-x-2 rounded-md border-b-2 bg-white px-4 py-2">
         <div className="flex flex-col items-center gap-1">
           <h2 className="text-xs font-medium">Font</h2>
           <div className="flex gap-1">
@@ -99,43 +122,102 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               )}
             >
               <StrikethroughOutlined />
-            </button>{' '}
+            </button>
+            <button
+              className={clsx(
+                'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white'
+              )}
+              onClick={() => editor.chain().focus().unsetAllMarks().run()}
+            >
+              <svg
+                width={20}
+                height={20}
+                className="group-hover:fill-white"
+                viewBox="0 0 32 32"
+                id="icon"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_iconCarrier">
+                  <defs>
+                    <style dangerouslySetInnerHTML={{ __html: '.cls-1{fill:none;}' }} />
+                  </defs>
+                  <title>erase</title>
+                  <rect x={7} y={27} width={23} height={2} />
+                  <path
+                    d="M27.38,10.51,19.45,2.59a2,2,0,0,0-2.83,0l-14,14a2,2,0,0,0,0,2.83L7.13,24h9.59L27.38,13.34A2,2,0,0,0,27.38,10.51ZM15.89,22H8L4,18l6.31-6.31,7.93,7.92Zm3.76-3.76-7.92-7.93L18,4,26,11.93Z"
+                    transform="translate(0 0)"
+                  />
+                  <rect
+                    id="_Transparent_Rectangle_"
+                    data-name="<Transparent Rectangle>"
+                    className="cls-1"
+                    width={32}
+                    height={32}
+                  />
+                </g>
+              </svg>
+            </button>
+          </div>
+          <div className="flex gap-1">
+            <button
+              aria-label="bold"
+              onClick={() => editor.chain().focus().setTextAlign('left').run()}
+              className={clsx('flex h-5 w-fit items-center justify-center p-4 text-black', {
+                'bg-black !text-white': editor.isActive({ textAlign: 'left' })
+              })}
+            >
+              <AlignLeftOutlined />
+            </button>
+            <button
+              aria-label="italic"
+              onClick={() => editor.chain().focus().setTextAlign('center').run()}
+              className={clsx(
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                {
+                  'bg-black !text-white': editor.isActive({ textAlign: 'center' })
+                }
+              )}
+            >
+              <AlignCenterOutlined />
+            </button>
+            <button
+              aria-label="strike"
+              onClick={() => editor.chain().focus().setTextAlign('right').run()}
+              className={clsx(
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                {
+                  'bg-black !text-white': editor.isActive({ textAlign: 'right' })
+                }
+              )}
+            >
+              <AlignRightOutlined />
+            </button>
+            <button
+              aria-label="strike"
+              onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+              className={clsx(
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                {
+                  'bg-black !text-white': editor.isActive({ textAlign: 'justify' })
+                }
+              )}
+            >
+              <FaAlignJustify />
+            </button>
           </div>
           <div className="flex flex-col items-center gap-1">
             <div className="flex gap-1 px-2">
               <button
+                aria-label="line"
                 className={clsx(
-                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white'
+                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white disabled:opacity-10',
+                  {
+                    'bg-black !text-white': editor.isActive('highlight')
+                  }
                 )}
-                onClick={() => editor.chain().focus().unsetAllMarks().run()}
+                onClick={() => editor.chain().focus().toggleHighlight().run()}
               >
-                <svg
-                  width={20}
-                  height={20}
-                  className="group-hover:fill-white"
-                  viewBox="0 0 32 32"
-                  id="icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <defs>
-                      <style dangerouslySetInnerHTML={{ __html: '.cls-1{fill:none;}' }} />
-                    </defs>
-                    <title>erase</title>
-                    <rect x={7} y={27} width={23} height={2} />
-                    <path
-                      d="M27.38,10.51,19.45,2.59a2,2,0,0,0-2.83,0l-14,14a2,2,0,0,0,0,2.83L7.13,24h9.59L27.38,13.34A2,2,0,0,0,27.38,10.51ZM15.89,22H8L4,18l6.31-6.31,7.93,7.92Zm3.76-3.76-7.92-7.93L18,4,26,11.93Z"
-                      transform="translate(0 0)"
-                    />
-                    <rect
-                      id="_Transparent_Rectangle_"
-                      data-name="<Transparent Rectangle>"
-                      className="cls-1"
-                      width={32}
-                      height={32}
-                    />
-                  </g>
-                </svg>
+                <AiOutlineHighlight />
               </button>
               <button
                 aria-label="line"
@@ -162,7 +244,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
         </div>
         <div className="flex flex-col items-center gap-1">
           <div className="flex flex-col items-center gap-1">
-            <h2 className="text-xs font-medium">Table</h2>
+            <h2 className="text-xs font-medium text-emerald-600">Table</h2>
             <div className="flex gap-1 px-2">
               <div className="flex gap-2 px-2">
                 <div className="flex flex-col items-center">
@@ -181,6 +263,19 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                     )}
                   >
                     <BsTable size={16} />
+                  </button>
+                </div>
+                <div className="flex flex-col items-center">
+                  <h2 className="text-xs font-medium">Delete</h2>
+                  <button
+                    aria-label="list"
+                    onClick={() => editor.chain().focus().deleteTable().run()}
+                    disabled={!editor.can().deleteTable()}
+                    className={clsx(
+                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black disabled:opacity-10'
+                    )}
+                  >
+                    <AiOutlineDelete size={20} />
                   </button>
                 </div>
                 <div className="flex flex-col items-center">
@@ -222,8 +317,8 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                   </h2>
                   <div className="flex gap-1">
                     <button
-                      onClick={() => editor.chain().focus().addRowBefore().run()}
-                      disabled={!editor.can().addRowBefore()}
+                      onClick={() => editor.chain().focus().addColumnBefore().run()}
+                      disabled={!editor.can().addColumnBefore()}
                       aria-label="orderlist"
                       className={clsx(
                         'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
@@ -232,9 +327,9 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       <FcAddRow size={20} />
                     </button>
                     <button
+                      onClick={() => editor.chain().focus().addRowBefore().run()}
+                      disabled={!editor.can().addRowBefore()}
                       aria-label="orderlist"
-                      onClick={() => editor.chain().focus().addColumnBefore().run()}
-                      disabled={!editor.can().addColumnBefore()}
                       className={clsx(
                         'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
                       )}
@@ -428,7 +523,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                 <button
                   aria-label="line"
                   className={clsx(
-                    'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black'
+                    'flex h-5 w-[140px] items-center justify-center rounded-sm p-4 text-black'
                   )}
                 >
                   <ColorPicker
@@ -438,6 +533,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                     defaultValue="#000000"
                     size="small"
                     allowClear
+                    onClear={() => editor.chain().focus().setColor('#000000').run()}
                     placement="topLeft"
                     showText
                   />
@@ -447,7 +543,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-1 flex-col items-center">
           <h2 className="text-xs font-medium">Element</h2>
           <div className="flex px-2">
             <button
@@ -473,6 +569,15 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               )}
             >
               <OrderedListOutlined />
+            </button>
+            <button
+              aria-label="list"
+              onClick={addImage}
+              className={clsx(
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black'
+              )}
+            >
+              <LuImagePlus />
             </button>
           </div>
         </div>

@@ -1,32 +1,56 @@
 'use client'
 import { MenuEditor, TableCellC } from '@/components/client'
 import '@/styles/tiptap.css'
+import '@/styles/space.css'
 import { LoadingOutlined } from '@ant-design/icons'
 import { Color } from '@tiptap/extension-color'
+import Dropcursor from '@tiptap/extension-dropcursor'
+import Highlight from '@tiptap/extension-highlight'
 import Image from '@tiptap/extension-image'
 import ListItem from '@tiptap/extension-list-item'
 import Table from '@tiptap/extension-table'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
+import TextAlign from '@tiptap/extension-text-align'
 import TextStyle from '@tiptap/extension-text-style'
 import { EditorProvider } from '@tiptap/react'
+import Document from '@tiptap/extension-document'
+import Placeholder from '@tiptap/extension-placeholder'
 import StarterKit from '@tiptap/starter-kit'
-import { Input, Spin } from 'antd'
-import { Button } from 'antd/es/radio'
+import { Spin } from 'antd'
+import { Button } from 'antd'
 import clsx from 'clsx'
 import { useState } from 'react'
-
+const CustomDocument = Document.extend({
+  content: 'heading block*'
+})
 const extensions = [
-  Table.configure({
-    resizable: true
-  }),
   TableRow,
   TableHeader,
   TableCellC,
   Image,
+  Dropcursor,
+  Highlight,
+  CustomDocument,
+  Table.configure({
+    resizable: true
+  }),
+  TextAlign.configure({
+    types: ['heading', 'paragraph']
+  }),
+  Placeholder.configure({
+    placeholder: ({ node }) => {
+      if (node.type.name === 'heading') {
+        return 'What’s the title?'
+      }
+
+      return 'Write...'
+    }
+  }),
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
   TextStyle.configure({ types: [ListItem.name] } as any),
   StarterKit.configure({
+    document: false,
     bulletList: {
       keepMarks: true,
       keepAttributes: false // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
@@ -38,37 +62,7 @@ const extensions = [
   })
 ]
 
-const content = `
-<h2>
-  Hi there,
-</h2>
-<p>
-  this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
-</p>
-  <table style="width:100%">
-    <tr>
-      <th>Firstname</th>
-      <th>Lastname</th>
-      <th>Age</th>
-    </tr>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Doe</td>
-      <td>80</td>
-    </tr>
-  </table>
-
-`
+const content = ``
 const PostPage = () => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -79,11 +73,11 @@ const PostPage = () => {
     setOpen(true)
   }
   return (
-    <div className="flex h-screen min-h-dvh w-full flex-col justify-start gap-2 overflow-y-auto bg-slate-100 p-8 lg:flex-row">
+    <div className="flex h-screen min-h-dvh w-full flex-col justify-start gap-2 overflow-y-auto bg-black px-8 py-2 lg:flex-row">
+      <span className="space"></span>
       <div className="mx-auto flex h-full w-full flex-col gap-3 lg:w-3/4">
-        <Input placeholder="Title" className="h-14 !text-xl font-bold uppercase" />
         <div
-          className={clsx('flex flex-1 flex-col overflow-y-auto rounded-lg bg-white p-2', {
+          className={clsx('flex flex-1 flex-col overflow-hidden rounded-lg bg-white p-2', {
             'animate-fade': !loading
           })}
         >
@@ -111,9 +105,7 @@ const PostPage = () => {
           </EditorProvider>
         </div>
       </div>
-      <Button onClick={onOpen} className="w-fit">
-        Preview
-      </Button>
+      <Button onClick={onOpen}>Preview</Button>
     </div>
   )
 }

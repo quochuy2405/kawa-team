@@ -1,4 +1,6 @@
 .tiptap {
+  outline: 0;
+  height: 100%;
   > * + * {
     margin-top: 0.75em;
   }
@@ -23,6 +25,7 @@
   h5,
   h6 {
     line-height: 1.1; /* Set the line height */
+    font-weight: 600;
   }
 
   h1 {
@@ -56,7 +59,7 @@
 
   pre {
     background: #0d0d0d;
-    color: #fff;
+    color: white;
     font-family: 'JetBrainsMono', monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
@@ -83,11 +86,23 @@
     background-color: #272727 !important;
     margin: 1rem 0 !important;
   }
+
+  img {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: fill;
+    height: auto;
+
+    &.ProseMirror-selectednode {
+      outline: 3px solid #68cef8;
+    }
+  }
 }
 .tiptap {
   padding: 10px;
-  height: 76dvh;
-  overflow-y: auto;
+  flex: 1;
+  border-radius: 8px;
 }
 
 .tiptap table {
@@ -96,15 +111,18 @@
   width: 100%;
   margin: 0;
   overflow: hidden;
+  border-radius: 2px;
 }
 .menu-edit + div {
   z-index: 1;
   position: relative;
+  flex: 1;
+  overflow-y: auto;
 }
 .tiptap td,
 th {
   min-width: 1em;
-  border: 2px solid #ced4da;
+  border: 2px solid #707070;
   padding: 3px 5px;
   vertical-align: top;
   box-sizing: border-box;
@@ -118,7 +136,9 @@ th {
 .tiptap th {
   font-weight: bold;
   text-align: left;
-  background-color: #f1f3f5;
+  background-color: #000000;
+  color: white;
+  border-color: #707070;
   padding: 10px;
 }
 
@@ -151,4 +171,11 @@ th {
 .resize-cursor {
   cursor: ew-resize;
   cursor: col-resize;
+}
+.tiptap .is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #ced4da;
+  pointer-events: none;
+  height: 0;
 }

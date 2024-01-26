@@ -6,6 +6,7 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
+  plugins: [require('tailwindcss-animated')],
   theme: {
     extend: {
       // backgroundImage: {
@@ -14,7 +15,6 @@ const config: Config = {
       //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       // },
     }
-  },
-  plugins: []
+  }
 }
 export default config

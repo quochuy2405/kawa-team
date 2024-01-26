@@ -2,19 +2,51 @@
   > * + * {
     margin-top: 0.75em;
   }
-
+  p {
+    margin: 0;
+  }
   ul,
   ol {
     padding: 0 1rem;
   }
-
+  ul {
+    list-style: circle;
+  }
+  ol {
+    list-style: decimal;
+  }
+  /* Apply Tailwind CSS utility classes to set line-height and text size for headings */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    line-height: 1.1;
+    line-height: 1.1; /* Set the line height */
+  }
+
+  h1 {
+    font-size: 2.5rem; /* Set the font size for Heading 1 */
+  }
+
+  h2 {
+    font-size: 2rem; /* Set the font size for Heading 2 */
+  }
+
+  h3 {
+    font-size: 1.75rem; /* Set the font size for Heading 3 */
+  }
+
+  h4 {
+    font-size: 1.5rem; /* Set the font size for Heading 4 */
+  }
+
+  h5 {
+    font-size: 1.25rem; /* Set the font size for Heading 5 */
+  }
+
+  h6 {
+    font-size: 1rem; /* Set the font size for Heading 6 */
   }
 
   code {
@@ -45,11 +77,78 @@
   blockquote {
     padding-left: 1rem;
     border-left: 2px solid rgba(#0d0d0d, 0.1);
+    quotes: '«' '»';
   }
-
   hr {
-    border: none;
-    border-top: 2px solid rgba(#0d0d0d, 0.1);
-    margin: 2rem 0;
+    background-color: #272727 !important;
+    margin: 1rem 0 !important;
   }
+}
+.tiptap {
+  padding: 10px;
+  height: 76dvh;
+  overflow-y: auto;
+}
+
+.tiptap table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+.menu-edit + div {
+  z-index: 1;
+  position: relative;
+}
+.tiptap td,
+th {
+  min-width: 1em;
+  border: 2px solid #ced4da;
+  padding: 3px 5px;
+  vertical-align: top;
+  box-sizing: border-box;
+  position: relative;
+
+  > * {
+    margin-bottom: 0;
+  }
+}
+
+.tiptap th {
+  font-weight: bold;
+  text-align: left;
+  background-color: #f1f3f5;
+  padding: 10px;
+}
+
+.tiptap .selectedCell:after {
+  z-index: 2;
+  position: absolute;
+  content: '';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(200, 200, 255, 0.4);
+  pointer-events: none;
+}
+
+.tiptap .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: -2px;
+  width: 4px;
+  background-color: #adf;
+  pointer-events: none;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
 }

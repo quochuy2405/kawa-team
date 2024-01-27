@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 import { getDatabase } from 'firebase/database'
-import * as firebaseui from 'firebaseui'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,5 +25,4 @@ auth.languageCode = 'it'
 const provider = new GoogleAuthProvider()
 provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
 
-const ui = new firebaseui.auth.AuthUI(auth)
-export { app, auth, db, provider, ui, firebaseui }
+export { app, auth, db, provider }

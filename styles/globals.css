@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body {
+  background-color: black;
+}
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -15,4 +17,15 @@
 *::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   border-radius: 100rem;
+}
+
+.outline-text {
+  -webkit-text-stroke: 2px white;
+}
+
+.perspective {
+  perspective: 500px;
+}
+html {
+  scroll-snap-type: y mandatory;
 }

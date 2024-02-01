@@ -1,10 +1,15 @@
+import { Header } from '@/components/client'
 import Providers from '@/utils/providers'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Oswald } from 'next/font/google'
 import '../styles/globals.css'
-import Head from 'next/head'
+import '../styles/space.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Oswald({
+  weight: ['200', '300', '400', '500', '600', '700'],
+  subsets: ['latin', 'vietnamese']
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,8 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
+      <body className={font.className}>
+        <span className="space"></span>
+        <AntdRegistry>
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
+        </AntdRegistry>
       </body>
     </html>
   )

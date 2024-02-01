@@ -1,5 +1,5 @@
 'use client'
-import { MenuEditor, TableCellC } from '@/components/client'
+import { MenuEditor, TableCellC } from '@/components/client/molecules'
 import '@/styles/tiptap.css'
 import '@/styles/space.css'
 import { LoadingOutlined } from '@ant-design/icons'
@@ -75,7 +75,7 @@ const PostPage = () => {
   return (
     <div className="flex h-screen min-h-dvh w-full flex-col justify-start gap-2 overflow-y-auto bg-black px-8 py-2 lg:flex-row">
       <span className="space"></span>
-      <div className="mx-auto flex h-full w-full flex-col gap-3 lg:w-3/4">
+      <div className="mx-auto flex h-full w-full flex-col gap-3 lg:w-4/5">
         <div
           className={clsx('flex flex-1 flex-col overflow-hidden rounded-lg bg-white p-2', {
             'animate-fade': !loading

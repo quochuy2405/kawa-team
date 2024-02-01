@@ -102,7 +102,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               onClick={() => editor.chain().focus().toggleItalic().run()}
               disabled={!editor.can().chain().focus().toggleItalic().run()}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                 {
                   'bg-black !text-white': editor.isActive('italic')
                 }
@@ -115,7 +115,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               onClick={() => editor.chain().focus().toggleStrike().run()}
               disabled={!editor.can().chain().focus().toggleStrike().run()}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                 {
                   'bg-black !text-white': editor.isActive('strike')
                 }
@@ -125,7 +125,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
             </button>
             <button
               className={clsx(
-                'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white'
+                'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear hover:bg-black hover:text-white'
               )}
               onClick={() => editor.chain().focus().unsetAllMarks().run()}
             >
@@ -172,7 +172,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               aria-label="italic"
               onClick={() => editor.chain().focus().setTextAlign('center').run()}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                 {
                   'bg-black !text-white': editor.isActive({ textAlign: 'center' })
                 }
@@ -184,7 +184,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               aria-label="strike"
               onClick={() => editor.chain().focus().setTextAlign('right').run()}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                 {
                   'bg-black !text-white': editor.isActive({ textAlign: 'right' })
                 }
@@ -196,7 +196,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               aria-label="strike"
               onClick={() => editor.chain().focus().setTextAlign('justify').run()}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                 {
                   'bg-black !text-white': editor.isActive({ textAlign: 'justify' })
                 }
@@ -210,7 +210,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               <button
                 aria-label="line"
                 className={clsx(
-                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white disabled:opacity-10',
+                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear hover:bg-black hover:text-white disabled:opacity-10',
                   {
                     'bg-black !text-white': editor.isActive('highlight')
                   }
@@ -222,7 +222,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               <button
                 aria-label="line"
                 className={clsx(
-                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white disabled:opacity-10'
+                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear hover:bg-black hover:text-white disabled:opacity-10'
                 )}
                 onClick={() => editor.chain().focus().undo().run()}
                 disabled={!editor.can().chain().focus().undo().run()}
@@ -232,7 +232,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               <button
                 aria-label="line"
                 className={clsx(
-                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white disabled:opacity-10'
+                  'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear hover:bg-black hover:text-white disabled:opacity-10'
                 )}
                 onClick={() => editor.chain().focus().redo().run()}
                 disabled={!editor.can().chain().focus().redo().run()}
@@ -259,7 +259,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                         .run()
                     }
                     className={clsx(
-                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black'
+                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear'
                     )}
                   >
                     <BsTable size={16} />
@@ -272,7 +272,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                     onClick={() => editor.chain().focus().deleteTable().run()}
                     disabled={!editor.can().deleteTable()}
                     className={clsx(
-                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black disabled:opacity-10'
+                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear disabled:opacity-10'
                     )}
                   >
                     <AiOutlineDelete size={20} />
@@ -285,7 +285,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                     onClick={() => editor.chain().focus().toggleHeaderCell().run()}
                     disabled={!editor.can().toggleHeaderCell()}
                     className={clsx(
-                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black disabled:opacity-10'
+                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear disabled:opacity-10'
                     )}
                   >
                     <TbTableRow size={16} />
@@ -303,7 +303,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       }
                     }}
                     className={clsx(
-                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black disabled:opacity-10'
+                      'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear disabled:opacity-10'
                     )}
                   >
                     <FaHighlighter size={16} />
@@ -321,7 +321,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       disabled={!editor.can().addColumnBefore()}
                       aria-label="orderlist"
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <FcAddRow size={20} />
@@ -331,7 +331,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       disabled={!editor.can().addRowBefore()}
                       aria-label="orderlist"
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <FcAddColumn size={20} />
@@ -348,7 +348,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       onClick={() => editor.chain().focus().addColumnAfter().run()}
                       disabled={!editor.can().addColumnAfter()}
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <FcAddRow size={20} />
@@ -358,7 +358,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       onClick={() => editor.chain().focus().addRowAfter().run()}
                       disabled={!editor.can().addRowAfter()}
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <FcAddColumn size={20} />
@@ -375,7 +375,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       onClick={() => editor.chain().focus().deleteRow().run()}
                       disabled={!editor.can().deleteRow()}
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <FcDeleteRow size={20} />
@@ -385,7 +385,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       onClick={() => editor.chain().focus().deleteColumn().run()}
                       disabled={!editor.can().deleteColumn()}
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <FcDeleteColumn size={20} />
@@ -400,7 +400,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       onClick={() => editor.chain().focus().mergeCells().run()}
                       disabled={!editor.can().mergeCells()}
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <AiOutlineMergeCells size={20} />
@@ -410,7 +410,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                       onClick={() => editor.chain().focus().splitCell().run()}
                       disabled={!editor.can().splitCell()}
                       className={clsx(
-                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black disabled:opacity-10'
+                        'flex h-5 w-fit items-center justify-center rounded-sm p-4 px-2 text-black duration-200 ease-linear disabled:opacity-10'
                       )}
                     >
                       <AiOutlineSplitCells size={20} />
@@ -428,7 +428,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                   <button
                     aria-label={heading.key}
                     className={clsx(
-                      'flex h-5 w-fit items-center justify-center rounded-sm px-2 py-4 text-black',
+                      'flex h-5 w-fit items-center justify-center rounded-sm px-2 py-4 text-black duration-200 ease-linear',
                       {
                         'bg-black !text-white': editor.isActive('heading', { level: heading.level })
                       }
@@ -450,7 +450,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                   aria-label="code"
                   onClick={() => editor.chain().focus().toggleCodeBlock().run()}
                   className={clsx(
-                    'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                    'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                     {
                       'bg-black !text-white': editor.isActive('codeBlock')
                     }
@@ -461,7 +461,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
 
                 <button
                   className={clsx(
-                    'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white'
+                    'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear hover:bg-black hover:text-white'
                   )}
                   aria-label="quote"
                   onClick={() => editor.chain().focus().setHorizontalRule().run()}
@@ -492,7 +492,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                 <button
                   aria-label="line"
                   className={clsx(
-                    'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black hover:bg-black hover:text-white'
+                    'group flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear hover:bg-black hover:text-white'
                   )}
                   onClick={() => editor.chain().focus().setHardBreak().run()}
                 >
@@ -523,7 +523,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
                 <button
                   aria-label="line"
                   className={clsx(
-                    'flex h-5 w-[140px] items-center justify-center rounded-sm p-4 text-black'
+                    'flex h-5 w-[140px] items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear'
                   )}
                 >
                   <ColorPicker
@@ -550,7 +550,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               aria-label="list"
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                 {
                   'bg-black !text-white': editor.isActive('bulletList')
                 }
@@ -562,7 +562,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               aria-label="orderlist"
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black',
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear',
                 {
                   'bg-black !text-white': editor.isActive('orderedList')
                 }
@@ -574,7 +574,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ open, onClose }) => {
               aria-label="list"
               onClick={addImage}
               className={clsx(
-                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black'
+                'flex h-5 w-fit items-center justify-center rounded-sm p-4 text-black duration-200 ease-linear'
               )}
             >
               <LuImagePlus />

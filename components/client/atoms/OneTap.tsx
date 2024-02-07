@@ -1,5 +1,5 @@
 'use client'
-import { auth } from '@/utils/firebase.config'
+import { auth } from '@/configs/firebase.config'
 import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth'
 import React, { useEffect } from 'react'
 

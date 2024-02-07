@@ -1,7 +1,9 @@
 'use client'
-import { auth, provider } from '@/utils/firebase.config'
+import { auth, provider } from '@/configs/firebase.config'
+import { setCookiesHttpsOnly } from '@/utils/cookies'
 import { Button } from 'antd'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { cookies } from 'next/headers'
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 
@@ -18,6 +20,10 @@ const SignInGoogle = () => {
         // IdP data available using getAdditionalUserInfo(result)
         console.log('token', token)
         console.log('user', user)
+        if (token) {
+          setCookiesHttpsOnly('accessToken', token)
+        }
+
         // ...
       })
       .catch((error) => {

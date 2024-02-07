@@ -24,19 +24,11 @@ function ImageCustom({ id }: { id: number }) {
 }
 
 export default function App() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  })
-
   return (
     <div>
       {[1, 2, 3, 4, 5].map((image) => (
         <ImageCustom key={image} id={image} />
       ))}
-      <motion.div className="progress" style={{ scaleX }} />
     </div>
   )
 }

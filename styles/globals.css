@@ -7,6 +7,7 @@ body {
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
+  display: none;
 }
 
 *::-webkit-scrollbar-track {
@@ -28,4 +29,112 @@ body {
 }
 html {
   scroll-snap-type: y mandatory;
+  transition: all linear 2s;
+}
+.progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 6px;
+  background: white;
+  transform-origin: 0%;
+  z-index: 99;
+  border-radius: 100rem;
+}
+
+/* Animate the page header separatly */
+.pageHeader {
+  view-transition-name: page-header;
+}
+
+/* Animate the page content separatly */
+.pageContent {
+  view-transition-name: page-content;
+}
+
+::view-transition-old(root) {
+  animation: fade-and-scale-out 0.5s ease-in-out 1 forwards;
+}
+
+::view-transition-new(root) {
+  animation: fade-and-scale-in 1s ease-in-out 1 forwards;
+}
+
+::view-transition-old(page-header) {
+  animation: hide 1s ease-in-out 1 forwards;
+}
+
+::view-transition-new(page-header) {
+  animation: slide-right 2s ease-in-out 1 forwards;
+}
+
+::view-transition-old(page-content) {
+  animation: hide 1s ease-in-out 1 forwards;
+}
+
+::view-transition-new(page-content) {
+  animation: slide-left 2.5s ease-in-out 1 forwards;
+}
+
+/* First Animation */
+
+@keyframes fade-and-scale-in {
+  from {
+    opacity: 0;
+    /* transform: scale(0); */
+  }
+
+  to {
+    opacity: 1;
+    /* transform: scale(1);  */
+  }
+}
+
+@keyframes fade-and-scale-out {
+  from {
+    opacity: 1;
+    /* transform: scale(1); */
+  }
+
+  to {
+    opacity: 0;
+    /* transform: scale(0); */
+  }
+}
+
+/* Second Animation */
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

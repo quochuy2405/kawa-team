@@ -1,40 +1,11 @@
-/* eslint-disable @next/next/no-script-component-in-head */
-'use client'
-
-import { useAddPost } from '@/store/server/features/post/mutations'
-import { useGetPosts } from '@/store/server/features/post/queries'
+export async function generateMetadata({}) {
+  return {
+    title: 'Introduction'
+  }
+}
 
 export default function Home() {
-  const { isLoading: isGetPostsLoading, data: getPostsData } = useGetPosts()
-  const addPost = useAddPost()
+  // const { isLoad
 
-  return (
-    <div className="App">
-      <button
-        onClick={() =>
-          addPost.mutate({
-            id: 1,
-            userId: 10,
-            title: 'test',
-            body: 'test'
-          })
-        }
-      >
-        Add New Post
-      </button>
-      <hr />
-      <div>
-        {isGetPostsLoading ? (
-          <p>Loading...</p>
-        ) : (
-          getPostsData?.map((post: any) => (
-            <div key={post.id}>
-              <h4>{post.title}</h4>
-              <p>{post.body}</p>
-            </div>
-          ))
-        )}
-      </div>
-    </div>
-  )
+  return <div className="App">ok</div>
 }
